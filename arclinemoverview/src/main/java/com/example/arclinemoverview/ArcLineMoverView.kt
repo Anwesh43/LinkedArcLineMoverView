@@ -183,4 +183,27 @@ class ArcLineMoverView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : ArcLineMoverView) {
+
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val animator : Animator = Animator(view)
+        private val alm : ArcLineMover = ArcLineMover(0)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            alm.draw(canvas, paint)
+            animator.animate {
+                alm.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            alm.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
