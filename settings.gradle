@@ -1,0 +1,3 @@
+include ':arclinemoverview'
+include ':app'
+rootProject.name = "LinkedArcLineMoverView"
