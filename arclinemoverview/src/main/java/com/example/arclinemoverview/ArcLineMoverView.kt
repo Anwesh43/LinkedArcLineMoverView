@@ -38,13 +38,14 @@ fun Canvas.drawArcLineMover(scale : Float, w : Float, h : Float, paint : Paint) 
     val sf3 : Float = sf.divideScale(2, parts)
     val sf4 : Float = sf.divideScale(3, parts)
     save()
-    translate(size, h / 2)
+    translate(0f, h / 2)
     save()
-    translate((w - size) * sf4, 0f)
+    translate(size + (w - 2 * size) * sf4, -size)
+    rotate(360f * sf4)
     drawArc(RectF(-size, -size, size, size), 0f, 360f * sf2, false, paint)
-    restore()
     drawLine(-size * sf1, 0f, size * sf1, 0f, paint)
-    drawLine(0f, 0f, (w - size) * sf2, 0f, paint)
+    restore()
+    drawLine(0f, 0f, w * sf3, 0f, paint)
     restore()
 }
 
@@ -54,6 +55,7 @@ fun Canvas.drawALMNode(i : Int, scale : Float, paint : Paint) {
     paint.color = colors[i]
     paint.strokeCap = Paint.Cap.ROUND
     paint.strokeWidth = Math.min(w, h) / strokeFactor
+    paint.style = Paint.Style.STROKE
     drawArcLineMover(scale, w, h, paint)
 }
 
