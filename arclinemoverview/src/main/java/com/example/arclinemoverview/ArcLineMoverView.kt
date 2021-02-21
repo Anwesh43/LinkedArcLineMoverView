@@ -208,4 +208,13 @@ class ArcLineMoverView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : ArcLineMoverView {
+            val view : ArcLineMoverView = ArcLineMoverView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
